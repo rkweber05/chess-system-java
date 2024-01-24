@@ -1,13 +1,17 @@
 package chess;
 
 import boardgame.Board;
+import boardgame.Position;
+import chess.pieces.King;
+import chess.pieces.Rook;
 
 public class ChessMatch {
 
 	private Board board;
 	
 	public ChessMatch() {
-		board = new Board(8, 8);
+		board = new Board(8, 8); // crio um tabuleiro
+		initialSetup(); // e chamo para iniciar a partida
 	}
 	
 	public ChessPiece[][] getPieces(){ // retorna uma matriz de peças de chadrex correspondetes a essa partida
@@ -19,6 +23,12 @@ public class ChessMatch {
 			}
 		}
 		return mat;
+	}
+	
+	private void initialSetup() { // metodo responsavel por iniciar o tabuleiro e por as peças
+		board.placePiece(new Rook(board, Color.WHITE), new Position(2, 1));
+		board.placePiece(new King(board, Color.BLACK), new Position(0, 4));
+		board.placePiece(new King(board, Color.WHITE), new Position(7, 4));
 	}
 	
 }
