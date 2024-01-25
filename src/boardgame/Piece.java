@@ -1,9 +1,9 @@
 package boardgame;
 
-public abstract class Piece {
+public abstract class Piece { // peça
 
 	protected Position position;
-	private Board board;
+	private Board board; // tabuleiro
 	
 	public Piece(Board board) {
 		this.board = board;
@@ -14,13 +14,13 @@ public abstract class Piece {
 		return board;
 	}
 	
-	public abstract boolean[][] possibleMoves();
+	public abstract boolean[][] possibleMoves(); // Possiveis movimentos
 	
 	public boolean possibleMove(Position position) {
 		return possibleMoves()[position.getRow()][position.getColumn()];
 	}
 	
-	public boolean isThereAnyPossibleMove() {
+	public boolean isThereAnyPossibleMove() { // Existe algum movimento possível
 		boolean[][] mat = possibleMoves();
 		
 		for ( int i = 0; i < mat.length; i++) {

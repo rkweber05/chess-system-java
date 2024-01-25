@@ -7,7 +7,7 @@ import chess.ChessPiece;
 import chess.ChessPosition;
 import chess.Color;
 
-public class UI {
+public class UI { // User Interface = Interface de Usuário
 
 	// https://stackoverflow.com/questions/5762491/how-to-print-color-in-console-using-system-out-println
 
@@ -38,6 +38,7 @@ public class UI {
 		System.out.flush();
 	}
 	
+							 // leia a posição do xadrez
 	public static ChessPosition readChessPosition(Scanner sc) {
 		try {
 			String s = sc.nextLine();

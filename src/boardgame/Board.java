@@ -27,7 +27,7 @@ public class Board {
 	
 	public Piece piece(int row, int column) {
 		
-		if (!positionExists(row, column)) {
+		if (!positionExists(row, column)) { // Posição existente
 			throw new BoardException("Position not on the board");
 		}
 		
@@ -37,15 +37,16 @@ public class Board {
 	public Piece piece(Position position) {
 		
 		if (!positionExists(position)) {
-			throw new BoardException("Position not on the board");
+			throw new BoardException("Position not on the board"); // Exceções tabuleiro
 		}
 		
 		return pieces[position.getRow()][position.getColumn()];
 	}
 	
+			 // colocar peça
 	public void placePiece(Piece piece, Position position) { //pegar a matriz na posição dada, e atribuir a ela a posição que eu dei
 		
-		if (thereIsAPiece(position)) {
+		if (thereIsAPiece(position)) { // ha uma peça
 			throw new BoardException("There is already a piece on position " + position);
 		}
 		
@@ -81,7 +82,6 @@ public class Board {
 		if (!positionExists(position)) {
 			throw new BoardException("Position not on the board");
 		}
-		
 		
 		return piece(position) != null; // se for diferente de null significa que tem uma peça na posição
 	}
