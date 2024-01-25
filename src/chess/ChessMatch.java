@@ -8,11 +8,23 @@ import chess.pieces.Rook;
 
 public class ChessMatch { // Partida de xadrez
 
+	private int turn;  // vez
+	private Color currentPlayer; // Jogador atual
 	private Board board;
 	
 	public ChessMatch() {
 		board = new Board(8, 8); // crio um tabuleiro
+		turn = 1;
+		currentPlayer = Color.WHITE;
 		initialSetup(); // e chamo para iniciar a partida
+	}
+	
+	public int getTurn() {
+		return turn;
+	}
+	
+	public Color getCurrentPlayer() {
+		return currentPlayer;
 	}
 	
 	public ChessPiece[][] getPieces(){ // retorna uma matriz de peças de chadrex correspondetes a essa partida
@@ -40,7 +52,7 @@ public class ChessMatch { // Partida de xadrez
 		validateSourcePosition(source); // Validar posição de origem
 		validateTargetPosition(source, target); // Validar posição de destino
 		Piece capturedPiece = makeMove(source, target);
-		
+		nextTurn();
 		return (ChessPiece)capturedPiece; //Peça capturada
 	}
 	
@@ -58,6 +70,9 @@ public class ChessMatch { // Partida de xadrez
 		if (!board.thereIsAPiece(position)) {
 			throw new ChessException("There is no piece on source position");
 		}
+		if(currentPlayer != ((ChessPiece)board.piece(position)).getColor()) { // se a cor for diferente do jogador atual é a peça do adversario
+			throw new ChessException("The chosen piece is not yours.");
+		}
 		if (!board.piece(position).isThereAnyPossibleMove()) { // se não tiver nenhum movimento possivel
 			throw new ChessException("There is no possible moves for the chosen piece");
 		}
@@ -68,7 +83,13 @@ public class ChessMatch { // Partida de xadrez
 			throw new ChessException("The chosen piece can't move to target position");
 		}
 	}
-		
+	
+	private void nextTurn() {
+		turn++;
+		currentPlayer = (currentPlayer == Color.WHITE) ? Color.BLACK : Color.WHITE;
+		// se curretPlay foir igual a White, entao ele vai ser o Black,  caso contrario ele vai ser White
+	}
+	
 			  // Coloque nova peça	
 	private void placeNewPiece(char column, int row, ChessPiece piece) {
 		board.placePiece(piece, new ChessPosition(column, row).toPosition()); // convertendo para matriz
