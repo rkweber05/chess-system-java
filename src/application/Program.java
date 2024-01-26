@@ -22,7 +22,7 @@ public class Program {
 		List<ChessPiece> captured = new ArrayList<>();
 		
 		
-		while(true) {
+		while(!chessMatch.getCheckMate()) { // enquanto não estiver em checkMate continua o programa
 			try {
 				UI.clearScreen();
 				
@@ -54,8 +54,9 @@ public class Program {
 				System.out.println(exception.getMessage());
 				sc.nextLine();
 			}
-			
 		}
+		UI.clearScreen();
+		UI.printMatch(chessMatch, captured);
 	}
 
 }

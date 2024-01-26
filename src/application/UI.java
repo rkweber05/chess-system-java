@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import chess.ChessMatch;
@@ -66,11 +65,18 @@ public class UI { // User Interface = Interface de Usuário
 		System.out.println();
 		
 		System.out.println("Turn : " + chessMatch.getTurn());
-		System.out.println("Waiting player: " + chessMatch.getCurrentPlayer());
-		
-		if (chessMatch.getCheck()) { 
-			System.out.println("CHECK!");
+		if(!chessMatch.getCheckMate()) {
+			System.out.println("Waiting player: " + chessMatch.getCurrentPlayer());
+			
+			if (chessMatch.getCheck()) { 
+				System.out.println("CHECK!");
+			}
 		}
+		else {
+			System.out.println("CHECKMATE!");
+			System.out.println("Winner: " + chessMatch.getCurrentPlayer());
+		}
+		
 	}
 	
 	public static void printBoard(ChessPiece[][] pieces) {
@@ -117,17 +123,17 @@ public class UI { // User Interface = Interface de Usuário
 	private static void printCapturedPieces(List<ChessPiece> captured) { // imprimir na tela a lista de peças capturadas
 		List<ChessPiece> white = captured.stream().filter(x -> x.getColor() == Color.WHITE).collect(Collectors.toList());
 		List<ChessPiece> black = captured.stream().filter(x -> x.getColor() == Color.BLACK).collect(Collectors.toList());
-		System.out.println("Captured pieces: ");
+		System.out.println("Captured pieces:");
 		
 		System.out.print("White: ");
-		System.out.println(ANSI_WHITE); // para garantir que imprima o branco
-		System.out.println(Arrays.toString(white.toArray())); // imprimir um Array de valores no java
-		System.out.println(ANSI_RESET); // para resetar a cor da minha impressão
-				
+		System.out.print(ANSI_WHITE);
+		System.out.println(Arrays.toString(white.toArray()));
+		System.out.print(ANSI_RESET);
+		
 		System.out.print("Black: ");
-		System.out.println(ANSI_BLACK);
+		System.out.print(ANSI_YELLOW);
 		System.out.println(Arrays.toString(black.toArray()));
-		System.out.println(ANSI_RESET);
+		System.out.print(ANSI_RESET);
 		
 	}
 
