@@ -33,7 +33,7 @@ public class Program {
 				
 				boolean[][] possibleMoves = chessMatch.possibleMoves(source);
 				UI.clearScreen();
-				UI.printBoard(chessMatch.getPieces(), possibleMoves); // imprimir o tabuleiro e colorido as posições possíveis
+				UI.printBoard(chessMatch.getPieces(), possibleMoves); // imprimir o tabuleiro e colorindo as posições possíveis
 				
 				
 				System.out.println();
