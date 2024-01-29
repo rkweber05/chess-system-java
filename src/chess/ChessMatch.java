@@ -90,7 +90,8 @@ public class ChessMatch { // Partida de xadrez
 	
 				//Fazer mover
 	private Piece makeMove(Position source, Position target) {
-		Piece p = board.removePiece(source); // tiro a peça de origem do tabuleiro
+		ChessPiece p = (ChessPiece)board.removePiece(source); // tiro a peça de origem do tabuleiro
+		p.increaseMoveCount();
 		Piece capturedPiece = board.removePiece(target); // tiro uma peça possivelmente capturada da posição de destino
 		board.placePiece(p, target); // coloca na posição de destino a peça que estava na origem
 		
@@ -104,7 +105,8 @@ public class ChessMatch { // Partida de xadrez
 	
 			  // desfazer movimento 	
 	private void undoMove(Position source, Position target, Piece capturedPiece) {
-		Piece p = board.removePiece(target); // tira aquela peça que você moveu para o destino
+		ChessPiece p = (ChessPiece)board.removePiece(target); // tira aquela peça que você moveu para o destino
+		p.decreaseMoveCount();
 		board.placePiece(p, source); // vopu devolver para posição de origem
 		
 		if (capturedPiece != null) { // voltar peça do tabuleiro para a posição de destino
